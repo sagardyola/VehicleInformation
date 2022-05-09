@@ -9,7 +9,6 @@ namespace VehicleInformation.Business.Repository
     {
         public async Task<ServiceResponseDTO<VehicleMOTDetailsDTO>> Get(string RegistrationNumber)
         {
-            Thread.Sleep(1000);
             var spHandler = new HttpClientHandler()
             {
                 ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) =>
