@@ -1,19 +1,94 @@
 ﻿@inherits LayoutComponentBase
+@using VehicleInformation.Models
+@inject IVehicleInfoService _vehicleService
+@inject IJSRuntime _JSRuntime
 
-<PageTitle>VehicleInformation.Client</PageTitle>
+<PageTitle>MOT History of a Vehicle</PageTitle>
 
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
+<h3 class="text-center mt-3 mb-4">Check the MOT history of a vehicle</h3>
 
-    <main>
-        <div class="top-row px-4">
-            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
-        </div>
+<EditForm Model="RegistrationNumber" OnValidSubmit="SearchVehicleDetails">
+	<DataAnnotationsValidator />
+	<div class="container center mb-3">
+		<div class="row">
+			<div class="col-12 col-md-2 offset-md-2">
+				<label>Registration Number</label>
+			</div>
+			<div class="col-12 col-md-4">
+				<InputText @bind-Value="RegistrationNumber.RegistrationNo" class="form-control"></InputText>
+			</div>
+			<div class="col-12 col-md-2">
+				<button class="btn btn-primary w-100" disabled="@IsLoading">Search</button>
+			</div>
+		</div>
 
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
-</div>
+		<div class="row">
+			<div class="col-12 col-md-8 offset-md-4">
+				<ValidationMessage For="() => RegistrationNumber.RegistrationNo"></ValidationMessage>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12"><hr></div>
+		</div>
+	</div>
+</EditForm>
+
+
+@if (IsLoaded == true && VehicleDetails.Success == true)
+{
+	<div class="container">
+		<div class="row">
+			<div class="col-6 col-md-2 offset-md-4"><strong>Registration Number</strong></div>
+			<div class="col-6 col-md-2">@VehicleDetails.Data.RegistrationNo</div>
+		</div>
+		<div class="row">
+			<div class="col-6 col-md-2 offset-md-4"><strong>Make</strong></div>
+			<div class="col-6 col-md-2">@VehicleDetails.Data.Make</div>
+		</div>
+		<div class="row">
+			<div class="col-6 col-md-2 offset-md-4"><strong>Model</strong></div>
+			<div class="col-6 col-md-2">@VehicleDetails.Data.Model</div>
+		</div>
+		<div class="row">
+			<div class="col-6 col-md-2 offset-md-4"><strong>Colour</strong></div>
+			<div class="col-6 col-md-2">@VehicleDetails.Data.PrimaryColour</div>
+		</div>
+		<div class="row">
+			<div class="col-6 col-md-2 offset-md-4"><strong>MOT Expiry Date</strong></div>
+			<div class="col-6 col-md-2">@VehicleDetails.Data.ExpiryDate</div>
+		</div>
+		<div class="row">
+			<div class="col-6 col-md-2 offset-md-4"><strong>Mileage at last MOT</strong></div>
+			<div class="col-6 col-md-2">@VehicleDetails.Data.OdometerValue</div>
+		</div>
+	</div>
+}
+@if (IsLoading == true)
+{
+	<div class="container">
+		<div class="row">
+			<div class="col-12 text-center">
+				  <strong>Loading...</strong>
+				  <div class="spinner-border ml-auto" role="status" aria-hidden="true"></div>
+			</div>
+		</div>
+	</div>
+}
+
+@code {
+	private ServiceResponseDTO<VehicleMOTDetailsDTO> VehicleDetails { get; set; } = new ServiceResponseDTO<VehicleMOTDetailsDTO>();
+	private VehicleRegistrationDTO RegistrationNumber { get; set; } = new VehicleRegistrationDTO();
+	public bool IsLoading { get; set; }
+	public bool IsLoaded { get; set; }
+
+	private async Task SearchVehicleDetails()
+	{
+		IsLoading=true;
+		IsLoaded = false;
+		VehicleDetails = await _vehicleService.Get(RegistrationNumber.RegistrationNo);
+		if (VehicleDetails.Success == false) await _JSRuntime.ToastrError(VehicleDetails.Message);
+
+		IsLoading = false;
+		IsLoaded = true;
+	}
+}

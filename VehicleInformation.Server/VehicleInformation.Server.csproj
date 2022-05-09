@@ -6,4 +6,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\VehicleInformation.Business\VehicleInformation.Business.csproj" />
+    <ProjectReference Include="..\VehicleInformation.Models\VehicleInformation.Models.csproj" />
+  </ItemGroup>
+
 </Project>
