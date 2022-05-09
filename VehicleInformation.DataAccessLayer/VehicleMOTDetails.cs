@@ -24,6 +24,7 @@
         public string registration { get; set; }
         public string make { get; set; }
         public string model { get; set; }
+        public string manufactureYear { get; set; }
         public string firstUsedDate { get; set; }
         public string fuelType { get; set; }
         public string primaryColour { get; set; }
@@ -31,6 +32,8 @@
         public string registrationDate { get; set; }
         public string manufactureDate { get; set; }
         public string engineSize { get; set; }
+        public string dvlaId { get; set; }
+        public string motTestExpiryDate { get; set; }
         public List<MotTest> motTests { get; set; }
     }
 }

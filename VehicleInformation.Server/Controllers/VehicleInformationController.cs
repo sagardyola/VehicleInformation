@@ -36,7 +36,6 @@ namespace VehicleInformation.Server.Controllers
                     StatusCode = StatusCodes.Status404NotFound
                 });
             }
-
             return Ok(vehicleDetails);
         }
     }

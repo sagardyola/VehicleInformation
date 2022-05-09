@@ -35,17 +35,22 @@ namespace VehicleInformation.Business.Repository
             }
 
             var _vDetails = JsonConvert.DeserializeObject<IEnumerable<VehicleMOTDetails>>(content).FirstOrDefault();
-            VehicleMOTDetailsDTO _details = new VehicleMOTDetailsDTO();
 
-            if (_vDetails.registration != null) _details.RegistrationNo = _vDetails.registration;
-            if (_vDetails.make != null) _details.Make = _vDetails.make;
-            if (_vDetails.model != null) _details.Model = _vDetails.model;
-            if (_vDetails.primaryColour != null) _details.PrimaryColour = _vDetails.primaryColour;
+            VehicleMOTDetailsDTO _details = new VehicleMOTDetailsDTO() { 
+                RegistrationNo = _vDetails.registration,
+                Make = _vDetails.make != null ? _vDetails.make : null,
+                Model = _vDetails.model != null ? _vDetails.model : null,
+                PrimaryColour = _vDetails.primaryColour != null ? _vDetails.primaryColour : null,
+                ExpiryDate = _vDetails.motTestExpiryDate != null ? _vDetails.motTestExpiryDate : null
+            };
+
 
             if (_vDetails.motTests != null)
             {
-                if (_vDetails.motTests.FirstOrDefault().expiryDate != null) _details.ExpiryDate = _vDetails.motTests.FirstOrDefault().expiryDate;
-                if (_vDetails.motTests.FirstOrDefault().odometerValue != null) _details.OdometerValue = _vDetails.motTests.FirstOrDefault().odometerValue;
+                _details.OdometerValue = (_vDetails.motTests.FirstOrDefault().odometerValue != null) ? _vDetails.motTests.FirstOrDefault().odometerValue : null;
+                _details.OdometerValue = (_vDetails.motTests.FirstOrDefault().odometerUnit != null) ? _details.OdometerValue + _vDetails.motTests.FirstOrDefault().odometerUnit : null;
+
+                _details.ExpiryDate = (_vDetails.motTestExpiryDate == null && _vDetails.motTests.FirstOrDefault().expiryDate != null) ? _vDetails.motTests.FirstOrDefault().expiryDate : null;
             }
 
             return new ServiceResponseDTO<VehicleMOTDetailsDTO> { Data = _details, StatusCode = 200 };

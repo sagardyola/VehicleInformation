@@ -16,8 +16,4 @@
     <ProjectReference Include="..\VehicleInformation.Models\VehicleInformation.Models.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Pages\" />
-  </ItemGroup>
-
 </Project>

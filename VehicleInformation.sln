@@ -7,11 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VehicleInformation.Models",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VehicleInformation.Server", "VehicleInformation.Server\VehicleInformation.Server.csproj", "{F5B3E923-2146-41EF-9D65-48A9CDA59A6A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VehicleInformation.Client", "VehicleInformation.Client\VehicleInformation.Client.csproj", "{77942189-5A7A-40A3-B9DB-074B8B13B39B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VehicleInformation.Client", "VehicleInformation.Client\VehicleInformation.Client.csproj", "{77942189-5A7A-40A3-B9DB-074B8B13B39B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VehicleInformation.DataAccessLayer", "VehicleInformation.DataAccessLayer\VehicleInformation.DataAccessLayer.csproj", "{019F9F6D-E0AE-4942-8FD7-882FA8A756D2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VehicleInformation.DataAccessLayer", "VehicleInformation.DataAccessLayer\VehicleInformation.DataAccessLayer.csproj", "{019F9F6D-E0AE-4942-8FD7-882FA8A756D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VehicleInformation.Business", "VehicleInformation.Business\VehicleInformation.Business.csproj", "{90429445-7647-463C-8A38-E119C1E2123D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VehicleInformation.Business", "VehicleInformation.Business\VehicleInformation.Business.csproj", "{90429445-7647-463C-8A38-E119C1E2123D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
